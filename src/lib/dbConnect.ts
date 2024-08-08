@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+// import { MongoMemoryServer } from "mongodb-memory-server";
+
 type ConnectionObject = {
   isConnected?: number;
 };
@@ -15,6 +17,12 @@ async function dbConnect(): Promise<void> {
 
   try {
     // Attempt to connect to the database
+    // const mongod = await MongoMemoryServer.create();
+    // const getUri = mongod.getUri();
+
+    // mongoose.set('strictQuery', true)
+    // const db = await mongoose.connect(getUri);
+
     const db = await mongoose.connect(process.env.MONGODB_URI || '', {});
 
     connection.isConnected = db.connections[0].readyState;
